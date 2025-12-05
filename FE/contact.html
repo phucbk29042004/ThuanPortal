@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookly - Liên hệ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- SVG Icons -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="user" viewBox="0 0 24 24">
+      <path fill="currentColor" fill-rule="evenodd" d="M12 1.25a4.75 4.75 0 1 0 0 9.5a4.75 4.75 0 0 0 0-9.5M8.75 6a3.25 3.25 0 1 1 6.5 0a3.25 3.25 0 0 1-6.5 0M12 12.25c-2.313 0-4.445.526-6.024 1.414C4.42 14.54 3.25 15.866 3.25 17.5v.102c-.001 1.162-.002 2.62 1.277 3.662c.629.512 1.51.877 2.7 1.117c1.192.242 2.747.369 4.773.369s3.58-.127 4.774-.369c1.19-.24 2.07-.605 2.7-1.117c1.279-1.042 1.277-2.5 1.276-3.662V17.5c0-1.634-1.17-2.96-2.725-3.836c-1.58-.888-3.711-1.414-6.025-1.414M4.75 17.5c0-.851.622-1.775 1.961-2.528c1.316-.74 3.184-1.222 5.29-1.222c2.104 0 3.972.482 5.288 1.222c1.34.753 1.961 1.677 1.961 2.528c0 1.308-.04 2.044-.724 2.6c-.37.302-.99.597-2.05.811c-1.057.214-2.502.339-4.476.339c-1.974 0-3.42-.125-4.476-.339c-1.06-.214-1.68-.509-2.05-.81c-.684-.557-.724-1.293-.724-2.601" clip-rule="evenodd"/>
+    </symbol>
+    <symbol id="cart" viewBox="0 0 24 24">
+      <path fill="currentColor" fill-rule="evenodd" d="M2.249 2.292a.75.75 0 1 0-.498 1.416l.262.091c.667.235 1.106.39 1.429.549c.303.149.437.27.525.398c.09.132.16.314.2.677c.04.38.041.875.041 1.615V9.76c0 1.453.014 2.5.151 3.3c.146.854.438 1.466.985 2.042c.594.627 1.346.9 2.243 1.026c.858.122 1.948.122 3.293.122h5.406c.742 0 1.366 0 1.87-.062c.537-.065 1.025-.209 1.452-.556c.426-.348.665-.797.837-1.309c.163-.482.289-1.093.439-1.82l.508-2.469l.002-.005l.01-.052c.165-.825.303-1.519.338-2.077c.036-.586-.031-1.164-.413-1.66c-.235-.306-.565-.479-.866-.584a4.617 4.617 0 0 0-1.002-.21c-.687-.076-1.522-.076-2.34-.076H5.667a5.932 5.932 0 0 0-.01-.108c-.054-.497-.17-.95-.453-1.362c-.284-.416-.662-.682-1.102-.899c-.412-.202-.936-.386-1.553-.603zm3.46 4.578h11.38c.856 0 1.61.001 2.205.067c.296.034.517.08.672.134a.56.56 0 0 1 .176.086c.062.082.128.23.102.651c-.027.444-.143 1.036-.321 1.926v.002l-.5 2.42c-.16.783-.27 1.303-.399 1.688c-.123.366-.239.523-.364.625c-.125.102-.303.184-.685.23c-.404.05-.935.051-1.734.051h-5.303c-1.417 0-2.4-.002-3.14-.107c-.716-.101-1.093-.285-1.366-.573c-.32-.338-.493-.668-.595-1.263c-.11-.65-.129-1.558-.129-3.047zM7.5 21.75a2.25 2.25 0 1 1 0-4.5a2.25 2.25 0 0 1 0 4.5m-.75-2.25a.75.75 0 1 0 1.5 0a.75.75 0 0 0-1.5 0m9.75 2.25a2.25 2.25 0 1 1 0-4.5a2.25 2.25 0 0 1 0 4.5m-.75-2.25a.75.75 0 1 0 1.5 0a.75.75 0 0 0-1.5 0" clip-rule="evenodd"/>
+    </symbol>
+  </svg>
+
+  <!-- Header -->
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/main-logo.png" class="logo" alt="Bookly">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+            <li class="nav-item"><a class="nav-link" href="category.html">Sách</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contact.html">Liên hệ</a></li>
+            <li class="nav-item pe-3 position-relative">
+              <a href="cart.html" class="nav-link">
+                <svg class="cart" width="24" height="24"><use xlink:href="#cart"></use></svg>
+                <span id="cart-count" class="badge bg-primary position-absolute top-0 start-100 translate-middle">0</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown" style="position: relative;">
+              <a href="login.html" id="auth-trigger" class="nav-link">
+                <svg class="user" width="24" height="24"><use xlink:href="#user"></use></svg>
+              </a>
+              <span id="greet-text" class="nav-link" style="display:none; cursor:pointer;"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contact -->
+  <section class="padding-large py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="mb-4">Liên hệ với chúng tôi</h3>
+          <form id="contact-form">
+            <div class="mb-3">
+              <label class="form-label">Họ tên</label>
+              <input type="text" id="contact-name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" id="contact-email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tin nhắn</label>
+              <textarea id="contact-message" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h3 class="mb-4">Thông tin liên hệ</h3>
+          <p><strong>Email:</strong> info@bookly.vn</p>
+          <p><strong>Điện thoại:</strong> 1900-xxxx</p>
+          <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận XYZ, TP.HCM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer py-5 bg-dark text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Về Bookly</h5>
+          <p>Nhà sách trực tuyến hàng đầu Việt Nam</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Liên hệ</h5>
+          <p>Email: info@bookly.vn</p>
+          <p>Điện thoại: 1900-xxxx</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Theo dõi chúng tôi</h5>
+          <p>Facebook | Instagram | Twitter</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("contact-form")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        await window.apiRequest("/api/contact", {
+          method: "POST",
+          body: JSON.stringify({
+            name: document.getElementById("contact-name").value,
+            email: document.getElementById("contact-email").value,
+            message: document.getElementById("contact-message").value,
+          }),
+        });
+        alert("Gửi tin nhắn thành công!");
+        document.getElementById("contact-form").reset();
+      } catch (err) {
+        console.error("Send contact failed:", err);
+        alert("Không thể gửi tin nhắn: " + (err.message || "Vui lòng thử lại"));
+      }
+    });
+  </script>
+</body>
+</html>
