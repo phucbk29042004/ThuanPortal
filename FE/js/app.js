@@ -229,7 +229,7 @@ if (!window.__booklyAppLoaded) {
   const bindAddToCart = () => {
     document.querySelectorAll(".btn-add-cart").forEach(btn => {
       btn.onclick = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         if (!state.userId) {
           alert("Vui lòng đăng nhập trước khi thêm vào giỏ hàng.");
           window.location.href = "login.html";
