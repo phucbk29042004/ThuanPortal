@@ -127,6 +127,7 @@ D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.AssemblyInfo.cs
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.csproj.CoreCompileInputs.cache
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.MvcApplicationPartsAssemblyInfo.cs
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.MvcApplicationPartsAssemblyInfo.cache
+D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.sourcelink.json
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets.build.json
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets.development.json
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets\msbuild.BE.Microsoft.AspNetCore.StaticWebAssets.props
@@ -135,9 +136,9 @@ D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargetin
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.BE.props
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\staticwebassets.pack.json
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\scopedcss\bundle\BE.styles.css
+D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.csproj.CopyComplete
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.dll
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\refint\BE.dll
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.pdb
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.genruntimeconfig.cache
 D:\ThuanPortal\BE\BE\obj\Debug\net8.0\ref\BE.dll
-D:\ThuanPortal\BE\BE\obj\Debug\net8.0\BE.csproj.CopyComplete

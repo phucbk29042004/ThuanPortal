@@ -6,9 +6,10 @@
   <title>Bookly - Thanh toán</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="luxury.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- SVG Icons -->
@@ -22,28 +23,31 @@
   </svg>
 
   <!-- Header -->
-  <header class="site-header">
-    <nav class="navbar navbar-expand-lg py-3">
+  <header class="site-header glass-navbar">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="index.html">
           <img src="images/main-logo.png" class="logo" alt="Bookly">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: var(--luxury-gold);">
+          <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 30 30\'%3e%3cpath stroke=\'rgba(212, 175, 55, 1)\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/%3e%3c/svg%3e');"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto align-items-center">
+            <li class="nav-item"><a class="nav-link cursor-pointer" href="index.html">Trang chủ</a></li>
+            <li class="nav-item"><a class="nav-link cursor-pointer" href="category.html">Sách</a></li>
+            <li class="nav-item"><a class="nav-link cursor-pointer" href="about.html">Về chúng tôi</a></li>
+            <li class="nav-item"><a class="nav-link cursor-pointer" href="contact.html">Liên hệ</a></li>
+          </ul>
           <ul class="navbar-nav ms-auto align-items-center">
-            <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
-            <li class="nav-item"><a class="nav-link" href="category.html">Sách</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
             <li class="nav-item pe-3 position-relative">
-              <a href="cart.html" class="nav-link">
+              <a href="cart.html" class="nav-link cursor-pointer">
                 <svg class="cart" width="24" height="24"><use xlink:href="#cart"></use></svg>
-                <span id="cart-count" class="badge bg-primary position-absolute top-0 start-100 translate-middle">0</span>
+                <span id="cart-count" class="badge position-absolute top-0 start-100 translate-middle" style="background: var(--luxury-gold); color: var(--luxury-black);">0</span>
               </a>
             </li>
             <li class="nav-item dropdown" style="position: relative;">
-              <a href="login.html" id="auth-trigger" class="nav-link">
+              <a href="login.html" id="auth-trigger" class="nav-link cursor-pointer">
                 <svg class="user" width="24" height="24"><use xlink:href="#user"></use></svg>
               </a>
               <span id="greet-text" class="nav-link" style="display:none; cursor:pointer;"></span>
@@ -55,54 +59,116 @@
   </header>
 
   <!-- Checkout Form -->
-  <section class="padding-large py-5">
+  <section class="padding-large py-5" style="padding-top: 120px;">
     <div class="container">
-      <h3 class="mb-4">Thanh toán</h3>
+      <h2 class="section-title-luxury mb-5">Thanh toán</h2>
       <div class="row">
         <div class="col-md-8">
-          <form id="checkout-form">
-            <div class="mb-3">
-              <label class="form-label">Họ tên người nhận *</label>
-              <input type="text" id="checkout-name" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Số điện thoại *</label>
-              <input type="tel" id="checkout-phone" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Địa chỉ *</label>
-              <textarea id="checkout-address" class="form-control" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Ghi chú</label>
-              <textarea id="checkout-notes" class="form-control" rows="2"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Phương thức thanh toán *</label>
-              <select id="checkout-method" class="form-select" required>
-                <option value="">Chọn phương thức</option>
-                <option value="COD">COD - Thanh toán khi nhận hàng</option>
-                <option value="Banking">Chuyển khoản ngân hàng</option>
-              </select>
-            </div>
-            <div id="banking-info" style="display:none;" class="mb-3 p-3 bg-light border rounded">
-              <h6>Thông tin chuyển khoản</h6>
-              <p>Ngân hàng: ABC Bank</p>
-              <p>Số tài khoản: 1234567890</p>
-              <p>Chủ tài khoản: Bookly Store</p>
-              <div id="qr-code-placeholder" class="text-center mt-3">
-                <p class="text-muted">Mã QR sẽ hiển thị sau khi xác nhận đơn hàng</p>
+          <div class="glass-card p-4 mb-4">
+            <form id="checkout-form">
+              <div class="mb-3">
+                <label class="form-label">Họ tên người nhận *</label>
+                <input type="text" id="checkout-name" class="form-control" required>
               </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg">Xác nhận đơn hàng</button>
-          </form>
+              <div class="mb-3">
+                <label class="form-label">Số điện thoại *</label>
+                <input type="tel" id="checkout-phone" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Địa chỉ *</label>
+                <textarea id="checkout-address" class="form-control" rows="3" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Ghi chú</label>
+                <textarea id="checkout-notes" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="mb-4">
+                <label class="form-label mb-3">Phương thức thanh toán *</label>
+                <div class="payment-methods-luxury">
+                  <div class="payment-method-card" data-method="COD">
+                    <input type="radio" id="payment-cod" name="payment-method" value="COD" required>
+                    <label for="payment-cod" class="payment-method-label">
+                      <div class="payment-icon">💵</div>
+                      <div class="payment-info">
+                        <h6 class="payment-title">COD</h6>
+                        <p class="payment-desc">Thanh toán khi nhận hàng</p>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="payment-method-card" data-method="Banking">
+                    <input type="radio" id="payment-banking" name="payment-method" value="Banking" required>
+                    <label for="payment-banking" class="payment-method-label">
+                      <div class="payment-icon">🏦</div>
+                      <div class="payment-info">
+                        <h6 class="payment-title">Chuyển khoản ngân hàng</h6>
+                        <p class="payment-desc">Chuyển khoản qua ngân hàng</p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="banking-info" style="display:none;" class="mb-3 p-4 glass-card">
+                <h6 class="text-luxury-gold mb-3">Thông tin chuyển khoản</h6>
+                <p class="text-white mb-2">Ngân hàng: ABC Bank</p>
+                <p class="text-white mb-2">Số tài khoản: 1234567890</p>
+                <p class="text-white mb-3">Chủ tài khoản: Bookly Store</p>
+                <div id="qr-code-placeholder" class="text-center mt-3">
+                  <p class="text-white mb-3 fw-bold">Mã QR thanh toán</p>
+                  <div class="d-flex justify-content-center align-items-center mb-3">
+                    <canvas id="qr-code-canvas-inline" style="max-width: 280px; width: 100%; border: 2px solid var(--luxury-gold); border-radius: 10px; padding: 10px; background: white; display: none;"></canvas>
+                    <img id="qr-code-image-inline" src="images/qrcode_285276929_47204debe16635005d0c5dbad30e85bd.png" alt="QR Code" class="img-fluid" style="max-width: 280px; width: 100%; height: auto; border: 2px solid var(--luxury-gold); border-radius: 10px; padding: 10px; background: white; display: block; margin: 0 auto;">
+                  </div>
+                </div>
+                <div id="banking-complete-section" style="display:none;" class="text-center mt-3">
+                  <p class="text-white mb-3" style="opacity: 0.9;">Sau khi chuyển khoản thành công, vui lòng nhấn nút bên dưới để xác nhận:</p>
+                  <button id="btn-complete-payment-inline" class="btn btn-luxury" style="min-width: 200px;">Hoàn thành</button>
+                </div>
+              </div>
+              
+              <!-- QR Code Modal -->
+              <div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 450px; margin: 1rem;">
+                  <div class="modal-content glass-card" style="background: rgba(26, 26, 26, 0.95); border: 1px solid var(--glass-border); max-height: 85vh; display: flex; flex-direction: column;">
+                    <div class="modal-header border-bottom" style="border-color: rgba(212, 175, 55, 0.2) !important; flex-shrink: 0; padding: 1rem;">
+                      <h5 class="modal-title text-luxury-gold" id="qrCodeModalLabel" style="font-size: 1.1rem;">Thanh toán qua ngân hàng</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="pointer-events: auto;"></button>
+                    </div>
+                    <div class="modal-body text-center" style="overflow-y: auto; flex: 1 1 auto; padding: 1rem;">
+                      <p class="text-white mb-2 fw-bold" style="font-size: 1rem;">Mã QR thanh toán</p>
+                      <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <canvas id="qr-code-canvas" style="max-width: 280px; width: 100%; border: 2px solid var(--luxury-gold); border-radius: 10px; padding: 10px; background: white; display: none;"></canvas>
+                        <img id="qr-code-image" src="" alt="QR Code" class="img-fluid" style="max-width: 280px; width: 100%; height: auto; border: 2px solid var(--luxury-gold); border-radius: 10px; padding: 10px; background: white; display: none; margin: 0 auto; pointer-events: auto;">
+                      </div>
+                      <div class="mb-2">
+                        <p class="text-white mb-1" style="font-size: 0.9rem;">Mã đơn hàng: <span id="qr-order-id" class="text-luxury-gold fw-bold"></span></p>
+                        <p class="text-white mb-1" style="font-size: 0.9rem;">Số tiền: <span id="qr-amount" class="text-luxury-gold fw-bold"></span></p>
+                      </div>
+                      <div class="mb-2 p-2" style="background: rgba(212, 175, 55, 0.1); border-radius: 8px;">
+                        <p class="text-white mb-1" style="font-size: 0.85rem;"><strong>Thông tin chuyển khoản:</strong></p>
+                        <p class="text-white mb-1" style="font-size: 0.85rem;">Ngân hàng: ABC Bank</p>
+                        <p class="text-white mb-1" style="font-size: 0.85rem;">Số tài khoản: 1234567890</p>
+                        <p class="text-white mb-0" style="font-size: 0.85rem;">Chủ tài khoản: Bookly Store</p>
+                      </div>
+                      <div class="alert alert-info mb-0" style="background: rgba(13, 110, 253, 0.1); border: 1px solid rgba(13, 110, 253, 0.3); color: #0dcaf0; font-size: 0.8rem; padding: 0.75rem;">
+                        <strong>Hướng dẫn:</strong> Sau khi chuyển khoản thành công, vui lòng nhấn nút <strong>"Hoàn thành"</strong> bên dưới để xác nhận thanh toán. 
+                        Đơn hàng của bạn sẽ chờ admin xác nhận.
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top justify-content-center" style="border-color: rgba(212, 175, 55, 0.2) !important; flex-shrink: 0; padding: 0.75rem; position: relative; z-index: 1055;">
+                      <button type="button" class="btn btn-luxury-outline me-2" data-bs-dismiss="modal" style="pointer-events: auto; z-index: 1056; min-width: 100px;">Đóng</button>
+                      <button type="button" id="btn-complete-payment" class="btn btn-luxury" style="pointer-events: auto; z-index: 1056; min-width: 100px;">Hoàn thành</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-luxury btn-lg w-100 cursor-pointer">Thanh toán</button>
+            </form>
+          </div>
         </div>
         <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h5>Tóm tắt đơn hàng</h5>
-            </div>
-            <div class="card-body" id="order-summary">
+          <div class="glass-card p-4">
+            <h5 class="text-luxury-gold mb-4">Tóm tắt đơn hàng</h5>
+            <div id="order-summary">
               <!-- Will be populated by JS -->
             </div>
           </div>
@@ -112,27 +178,32 @@
   </section>
 
   <!-- Footer -->
-  <footer class="site-footer py-5 bg-dark text-white">
+  <footer class="site-footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
           <h5>Về Bookly</h5>
-          <p>Nhà sách trực tuyến hàng đầu Việt Nam</p>
+          <p>Nhà sách trực tuyến hàng đầu Việt Nam, nơi văn học gặp gỡ sự tinh tế.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
           <h5>Liên hệ</h5>
           <p>Email: info@bookly.vn</p>
           <p>Điện thoại: 1900-xxxx</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
           <h5>Theo dõi chúng tôi</h5>
-          <p>Facebook | Instagram | Twitter</p>
+          <p>
+            <a href="#" class="text-luxury-gold me-3">Facebook</a> | 
+            <a href="#" class="text-luxury-gold me-3">Instagram</a> | 
+            <a href="#" class="text-luxury-gold">Twitter</a>
+          </p>
         </div>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <script src="js/app.js"></script>
   <script>
     if (!window.state.userId) {
@@ -146,22 +217,33 @@
         const cart = await window.apiRequest(`/api/cart?userId=${window.state.userId}`);
         const items = cart?.cartItems || cart?.CartItems || [];
         let total = 0;
-        const summary = items.map(item => {
+        const summaryPromises = items.map(async (item) => {
           const book = item.book || item.Book || {};
-          const price = book.price ?? book.Price ?? 0;
+          const bookId = book.bookId || book.BookId;
+          const originalPrice = book.price ?? book.Price ?? 0;
           const quantity = item.quantity || item.Quantity || 0;
-          const itemTotal = price * quantity;
+          
+          // Calculate discounted price
+          const priceInfo = await window.calculateDiscountedPrice(bookId, originalPrice);
+          const displayPrice = priceInfo.hasDiscount ? priceInfo.discountedPrice : originalPrice;
+          const itemTotal = displayPrice * quantity;
           total += itemTotal;
-          return `<div class="d-flex justify-content-between mb-2">
+          
+          return `<div class="d-flex justify-content-between mb-2 text-white">
             <span>${book.title || book.Title} x ${quantity}</span>
-            <span>$${itemTotal.toFixed(2)}</span>
+            <span class="text-luxury-gold">
+              ${priceInfo.hasDiscount ? `<span style="text-decoration: line-through; opacity: 0.6; font-size: 0.9rem; margin-right: 0.5rem;">${window.formatVND(originalPrice * quantity)}</span>` : ''}
+              ${window.formatVND(itemTotal)}
+            </span>
           </div>`;
-        }).join("");
+        });
+        
+        const summary = (await Promise.all(summaryPromises)).join("");
         document.getElementById("order-summary").innerHTML = summary + `
-          <hr>
+          <hr style="border-color: rgba(212, 175, 55, 0.2);">
           <div class="d-flex justify-content-between fw-bold">
-            <span>Tổng cộng:</span>
-            <span class="text-primary">$${total.toFixed(2)}</span>
+            <span class="text-white">Tổng cộng:</span>
+            <span class="text-luxury-gold" style="font-size: 1.3rem;">${window.formatVND(total)}</span>
           </div>
         `;
       } catch (err) {
@@ -170,13 +252,29 @@
     })();
 
     // Show/hide banking info
-    document.getElementById("checkout-method")?.addEventListener("change", (e) => {
-      const bankingInfo = document.getElementById("banking-info");
-      if (e.target.value === "Banking") {
-        bankingInfo.style.display = "block";
-      } else {
-        bankingInfo.style.display = "none";
-      }
+    document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+      radio.addEventListener("change", (e) => {
+        const bankingInfo = document.getElementById("banking-info");
+        const selectedMethod = e.target.value;
+        // Không cần set value cho checkout-method vì đã có radio buttons
+        if (selectedMethod === "Banking") {
+          if (bankingInfo) {
+            bankingInfo.style.display = "block";
+            // Đảm bảo QR code hiển thị
+            const qrImageInline = document.getElementById("qr-code-image-inline");
+            if (qrImageInline) {
+              qrImageInline.style.display = "block";
+            }
+            // Ẩn phần "Hoàn thành" khi chưa submit
+            const bankingCompleteSection = document.getElementById("banking-complete-section");
+            if (bankingCompleteSection) {
+              bankingCompleteSection.style.display = "none";
+            }
+          }
+        } else {
+          if (bankingInfo) bankingInfo.style.display = "none";
+        }
+      });
     });
 
     // Submit checkout
@@ -188,23 +286,64 @@
       }
 
       try {
+        const selectedPayment = document.querySelector('input[name="payment-method"]:checked')?.value;
+        if (!selectedPayment) {
+          alert("Vui lòng chọn phương thức thanh toán");
+          return;
+        }
+        
         const response = await window.apiRequest("/api/orders/checkout", {
           method: "POST",
           body: JSON.stringify({
             userId: window.state.userId,
-            paymentMethod: document.getElementById("checkout-method").value,
+            paymentMethod: selectedPayment,
           }),
         });
 
         if (response?.success) {
-          if (response.data?.qrCodeUrl) {
-            document.getElementById("qr-code-placeholder").innerHTML = `
-              <img src="${response.data.qrCodeUrl}" alt="QR Code" class="img-fluid">
-              <p class="mt-2">Vui lòng quét mã QR để thanh toán</p>
-            `;
+          if (selectedPayment === "Banking") {
+            // Lưu paymentId và orderId để confirm payment
+            const orderId = response.data?.orderId || response.data?.OrderId;
+            const paymentId = response.data?.paymentId || response.data?.PaymentId;
+            const amount = response.data?.totalPrice || response.data?.TotalPrice || 0;
+            
+            // Lưu vào localStorage để có thể confirm payment sau
+            if (paymentId && orderId) {
+              localStorage.setItem('pendingPaymentId', paymentId);
+              localStorage.setItem('pendingOrderId', orderId);
+            }
+            
+            // Hiển thị phần "Hoàn thành" trong banking-info
+            const bankingCompleteSection = document.getElementById("banking-complete-section");
+            if (bankingCompleteSection) {
+              bankingCompleteSection.style.display = "block";
+            }
+            
+            // Bind event cho nút Hoàn thành inline
+            const completeBtnInline = document.getElementById("btn-complete-payment-inline");
+            if (completeBtnInline) {
+              completeBtnInline.onclick = async () => {
+                if (paymentId) {
+                  await window.confirmPayment(Number(paymentId));
+                } else {
+                  alert("Không tìm thấy thông tin thanh toán.");
+                }
+              };
+            }
+            
+            // Thông báo đặt hàng thành công
+            alert("Đặt hàng thành công! Vui lòng chuyển khoản theo thông tin bên trên và nhấn 'Hoàn thành' sau khi chuyển khoản.");
+            
+            // Scroll đến phần banking-info để người dùng thấy QR code
+            const bankingInfo = document.getElementById("banking-info");
+            if (bankingInfo) {
+              bankingInfo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          } else {
+            // COD hoặc phương thức khác
+            alert("Đặt hàng thành công!");
+            window.location.href = "orders.html";
           }
-          alert("Đặt hàng thành công!");
-          window.location.href = "orders.html";
         } else {
           alert(response?.message || "Có lỗi xảy ra");
         }
@@ -212,6 +351,63 @@
         console.error("Checkout failed:", err);
         alert("Không thể đặt hàng: " + (err.message || "Vui lòng thử lại"));
       }
+    });
+
+    // Confirm payment function
+    window.confirmPayment = async function(paymentId) {
+      if (!paymentId) {
+        const modal = document.getElementById("qrCodeModal");
+        paymentId = modal?.dataset.paymentId;
+      }
+      
+      if (!paymentId) {
+        alert("Không tìm thấy thông tin thanh toán");
+        return;
+      }
+
+      if (!confirm("Bạn đã chuyển khoản thành công? Nhấn OK để xác nhận.")) {
+        return;
+      }
+
+      try {
+        const response = await window.apiRequest("/api/orders/confirm-payment", {
+          method: "POST",
+          body: JSON.stringify({
+            paymentId: Number(paymentId),
+            isSuccess: true,
+            transactionId: `TXN${Date.now()}`
+          }),
+        });
+
+        if (response?.success) {
+          alert("Xác nhận thanh toán thành công! Đơn hàng của bạn đang chờ admin xác nhận.");
+          
+          // Đóng modal nếu đang mở
+          const modalElement = document.getElementById("qrCodeModal");
+          if (modalElement) {
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) modal.hide();
+          }
+          
+          window.location.href = "orders.html";
+        } else {
+          alert(response?.message || "Không thể xác nhận thanh toán");
+        }
+      } catch (err) {
+        console.error("Confirm payment failed:", err);
+        alert("Không thể xác nhận thanh toán: " + (err.message || "Vui lòng thử lại"));
+      }
+    };
+
+    // Bind complete payment button
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("btn-complete-payment")?.addEventListener("click", () => {
+        const modal = document.getElementById("qrCodeModal");
+        const paymentId = modal?.dataset.paymentId;
+        if (paymentId) {
+          window.confirmPayment(Number(paymentId));
+        }
+      });
     });
   </script>
 </body>

@@ -17,6 +17,107 @@ if (!window.__booklyAppLoaded) {
   window.state = state;
 
   // ============================================
+  // UTILITY FUNCTIONS
+  // ============================================
+  // Format price to VNĐ
+  const formatVND = (price) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price);
+  };
+
+  window.formatVND = formatVND;
+
+  // Get active promotions and calculate discount
+  let cachedPromotions = null;
+  const getPromotions = async () => {
+    if (cachedPromotions) return cachedPromotions;
+    try {
+      const promotions = await apiRequest("/api/admin/promotions");
+      const activePromotions = (Array.isArray(promotions) ? promotions : []).filter(p => {
+        const now = new Date();
+        const startDate = new Date(p.startDate || p.StartDate);
+        const endDate = new Date(p.endDate || p.EndDate);
+        return (p.isActive || p.IsActive) && now >= startDate && now <= endDate;
+      });
+      cachedPromotions = activePromotions;
+      return activePromotions;
+    } catch (err) {
+      console.error("Get promotions failed:", err);
+      return [];
+    }
+  };
+
+  // Calculate discounted price for a book
+  const calculateDiscountedPrice = async (bookId, originalPrice) => {
+    if (!bookId || !originalPrice) {
+      return {
+        originalPrice: originalPrice || 0,
+        discountedPrice: originalPrice || 0,
+        discount: 0,
+        discountType: null,
+        discountValue: 0,
+        hasDiscount: false
+      };
+    }
+
+    const promotions = await getPromotions();
+    let bestDiscount = 0;
+    let discountType = null;
+    let discountValue = 0;
+
+    for (const promo of promotions) {
+      const items = promo.promotionItems || promo.PromotionItems || [];
+      // Try to find item by bookId (handle both number and string comparison)
+      const item = items.find(pi => {
+        const piBookId = pi.bookId || pi.BookId;
+        return Number(piBookId) === Number(bookId);
+      });
+      
+      if (item) {
+        const promoType = promo.promotionType || promo.PromotionType;
+        const discountVal = promo.discountValue || promo.DiscountValue || 0;
+        const specificDiscount = item.specificDiscount || item.SpecificDiscount;
+        
+        let discount = 0;
+        if (specificDiscount != null && specificDiscount !== undefined && specificDiscount !== 0) {
+          // Use specific discount if available (in VND)
+          discount = Number(specificDiscount);
+        } else if (promoType === 'percentage') {
+          // Calculate percentage discount
+          discount = (originalPrice * Number(discountVal)) / 100;
+        } else if (promoType === 'fixed') {
+          // Fixed amount discount (in VND)
+          discount = Number(discountVal);
+        }
+
+        if (discount > bestDiscount) {
+          bestDiscount = discount;
+          discountType = promoType;
+          discountValue = specificDiscount != null && specificDiscount !== undefined && specificDiscount !== 0 
+            ? specificDiscount 
+            : discountVal;
+        }
+      }
+    }
+
+    const finalPrice = Math.max(0, originalPrice - bestDiscount);
+    return {
+      originalPrice,
+      discountedPrice: finalPrice,
+      discount: bestDiscount,
+      discountType,
+      discountValue,
+      hasDiscount: bestDiscount > 0
+    };
+  };
+
+  window.calculateDiscountedPrice = calculateDiscountedPrice;
+
+  // ============================================
   // API REQUEST FUNCTION
   // ============================================
   const apiRequest = async (path, options = {}) => {
@@ -179,39 +280,57 @@ if (!window.__booklyAppLoaded) {
   // ============================================
   // RENDER FUNCTIONS
   // ============================================
-  const renderBookCard = (book) => {
+  const renderBookCard = async (book) => {
     const bookId = book.bookId || book.BookId;
     const title = book.title || book.Title || "Chưa có tên";
-    const price = book.price ?? book.Price ?? 0;
+    const originalPrice = book.price ?? book.Price ?? 0;
     const imageUrl = book.imageUrl || book.ImageUrl || "images/product-item1.png";
     const author = book.author || book.Author || {};
     const authorName = author.authorName || author.AuthorName || "";
 
+    // Calculate discount
+    const priceInfo = await calculateDiscountedPrice(bookId, originalPrice);
+    const displayPrice = priceInfo.hasDiscount ? priceInfo.discountedPrice : originalPrice;
+    const discountPercent = priceInfo.discountType === 'percentage' 
+      ? priceInfo.discountValue 
+      : priceInfo.discount > 0 
+        ? Math.round((priceInfo.discount / originalPrice) * 100) 
+        : 0;
+
     return `
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card h-100 p-3 border rounded-3 shadow-sm">
-          <img src="${imageUrl}" class="img-fluid product-card-img" alt="${title}" 
-               style="height: 220px; object-fit: cover; width: 100%;" 
-               onerror="this.src='images/product-item1.png'">
-          <h6 class="mt-3 mb-1 fw-bold">
-            <a href="detail.html?id=${bookId}" class="text-decoration-none text-dark">${title}</a>
-          </h6>
-          <p class="text-black-50 mb-1">${authorName}</p>
-          <div class="mb-2">
-            <span class="price text-primary fw-bold">$${price.toFixed(2)}</span>
+        <div class="product-card-luxury glass-card cursor-pointer" onclick="window.location.href='detail.html?id=${bookId}'">
+          <div class="product-image-wrapper">
+            ${priceInfo.hasDiscount ? `<span class="discount-badge">-${discountPercent}%</span>` : ''}
+            <img src="${imageUrl}" class="product-image-luxury" alt="${title}" 
+                 onerror="this.src='images/product-item1.png'">
           </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-dark btn-sm btn-add-cart flex-grow-1" data-book-id="${bookId}">
-              Thêm vào giỏ
+          <div class="product-info-luxury">
+            <h6 class="product-title-luxury">${title}</h6>
+            <p class="product-author-luxury">${authorName}</p>
+            <div class="product-price-section">
+              ${priceInfo.hasDiscount ? `
+                <div class="price-old">${formatVND(originalPrice)}</div>
+                <div class="price-new">${formatVND(displayPrice)}</div>
+              ` : `
+                <div class="price-normal">${formatVND(displayPrice)}</div>
+              `}
+            </div>
+            <button class="btn-add-cart-luxury btn-add-cart" data-book-id="${bookId}" data-original-price="${originalPrice}" data-discounted-price="${displayPrice}" onclick="event.stopPropagation();">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Thêm vào giỏ</span>
             </button>
-            <a href="detail.html?id=${bookId}" class="btn btn-outline-dark btn-sm">Chi tiết</a>
           </div>
         </div>
       </div>
     `;
   };
 
-  const renderGrid = (gridId, books = []) => {
+  const renderGrid = async (gridId, books = []) => {
     const grid = document.getElementById(gridId);
     if (!grid) return;
 
@@ -220,7 +339,9 @@ if (!window.__booklyAppLoaded) {
       return;
     }
 
-    grid.innerHTML = books.map(book => renderBookCard(book)).join("");
+    // Render all cards asynchronously
+    const cards = await Promise.all(books.map(book => renderBookCard(book)));
+    grid.innerHTML = cards.join("");
     bindAddToCart();
   };
 
